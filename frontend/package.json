@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "node scripts/patch-lightningcss.js"
+  },
+  "overrides": {
+    "lightningcss": "npm:lightningcss-wasm@1.30.1"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
