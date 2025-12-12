@@ -5,7 +5,7 @@ import { listByStatus, gateExit, gateEntry } from '../../services/usageService';
 import type { UsageRequest } from '../../services/types';
 import GateExitEntryModal from '../../components/GateExitEntryModal';
 import { toast } from 'react-toastify';
-import { login } from '../../../../../lib/auth';
+import { login } from '../../../../../../lib/auth';
 
 const fmtDT = (s?: string | null) => (s ? new Date(s).toLocaleString() : '-');
 

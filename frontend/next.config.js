@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 // Force lightningcss to use WASM (avoid missing native binary on this platform)
 process.env.CSS_TRANSFORMER_WASM = 'true';
+// Explicitly prefer the WASM build of lightningcss (Vercel/Linux build machines)
+process.env.LIGHTNINGCSS_LOAD_WASM = '1';
+process.env.LIGHTNINGCSS_NODE = 'wasm';
 
 const nextConfig = {
   // Disable lightningcss (native binary missing on this platform); fall back to PostCSS
