@@ -6,18 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "postinstall": "node scripts/patch-lightningcss.js"
-  },
-  "overrides": {
-    "lightningcss": "npm:lightningcss-wasm@1.30.1"
+    "lint": "next lint"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "axios": "^1.12.2",
     "clsx": "^2.1.1",
     "js-cookie": "^3.0.5",
-    "lightningcss-wasm": "^1.30.1",
+    "lightningcss": "file:scripts/lightningcss-stub",
     "lucide-react": "^0.536.0",
     "next": "^15.5.0",
     "papaparse": "^5.5.3",
