@@ -2,9 +2,13 @@
 // This runs postinstall and overwrites the lightningcss Node entry point.
 
 const fs = require('fs');
+const path = require('path');
 
 try {
-  const target = require.resolve('lightningcss/node/index.js');
+  // Resolve package.json then hop to node/index.js (bypass package exports)
+  const pkgPath = require.resolve('lightningcss/package.json');
+  const target = path.join(path.dirname(pkgPath), 'node', 'index.js');
+  fs.mkdirSync(path.dirname(target), { recursive: true });
   const shim = `// Auto-generated shim to force lightningcss to use WASM
 const wasm = require('lightningcss-wasm');
 module.exports = wasm;`;
