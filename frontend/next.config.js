@@ -24,7 +24,8 @@ const nextConfig = {
 
   async headers() {
     // Allow browser to send cookies (SPC_JWT) through Next.js proxy to Spring Boot
-    const appOrigin = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    const vercelUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '';
+    const appOrigin = process.env.NEXT_PUBLIC_APP_URL || vercelUrl || 'http://localhost:3000';
 
     return [
       {

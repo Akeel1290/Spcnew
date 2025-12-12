@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SPC Frontend (Next.js)
 
-## Getting Started
+Next.js 15 (App Router) frontend for SPC ERP. API traffic is proxied via `/aapi` (Auth service) and `/tapi` (Transport service) to the Spring Boot backends.
 
-First, run the development server:
+## Prerequisites
+- Node.js 18+ (Vercel default is fine)
+- npm 9+
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Local setup
+- Copy `.env.example` to `.env.local` and fill in values for your environment.
+- Install deps: `npm install`
+- Run dev server: `npm run dev` (http://localhost:3000)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment variables
+- `NEXT_PUBLIC_APP_URL` – Deployed frontend URL (used in CORS headers); set to your Vercel domain.
+- `NEXT_PUBLIC_AUTH_BASE` – Auth service base URL (no trailing slash).
+- `NEXT_PUBLIC_TRANSPORT_BASE` – Transport service base URL (no trailing slash).
+- `NEXT_PUBLIC_API_BASE` / `NEXT_PUBLIC_API_BASE_URL` – Optional single API base used by some transport pages.
+- `NEXT_PUBLIC_API_TIMEOUT` / `NEXT_PUBLIC_TRANSPORT_TIMEOUT` – Optional request timeout overrides (ms).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploying to Vercel
+- In Vercel, create a new project and select the `frontend` folder. Framework: Next.js; Build command: `npm run build`; Install command: `npm install`; Output directory: `.next` (defaults work).
+- Add the environment variables above to Production and Preview (UI or `vercel env pull/push`).
+- Deploy. `next.config.js` will allow cookies to pass through the `/aapi` and `/tapi` rewrites and will default the allowed origin to `NEXT_PUBLIC_APP_URL` or the Vercel domain.
+- Ensure your backend allows the Vercel domain in its CORS settings and is reachable from the internet.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Useful scripts
+- `npm run dev` – Start local dev server.
+- `npm run lint` – Lint the project.
+- `npm run build` – Production build.
